@@ -89,11 +89,7 @@
     </select>
     {{selected}}
   </p>
-  <!-- <input
-      placeholder="Enter Text Here"
-      v-model="tempMessage"
-      @keyup.enter="submit"
-    /> -->
+  
 
 
     <button v-on:click="SubmitYourData()">SubmitYourData</button>
@@ -141,7 +137,7 @@ export default {
         ${this.selected}
         `), */
         this.$root.$data.cardStack.push({number: this.Card_Number, vendor: this.selected, holder: this.CardHolder_Name, validMonth: this.Valid_thruMonth, validDay: this.Valid_thruDay, CCV: this.CCV,})
-        this.$root.$data.activeCardIndex= 0;
+        this.$root.$data.activeCardIndex= this.$root.$data.activeCardIndex + 1;
     }/* ,activeCardIndexCounter */
   },
 };

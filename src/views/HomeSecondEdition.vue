@@ -30,8 +30,8 @@ export default {
 
     activeCard: function(){
 
-      return this.$root.$data.cardStack[this.$root.$data.activeCardIndex]
-      /* return this.$root.$data.cardStack[this.$root.$data.activeCardIndexCounter + 1] */
+      /* return this.$root.$data.cardStack[this.$root.$data.activeCardIndex] */
+      return this.$root.$data.cardStack[this.$root.$data.activeCardIndexCounter + 0]
     }
   }
 };
