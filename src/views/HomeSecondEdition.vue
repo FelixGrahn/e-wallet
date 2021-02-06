@@ -17,7 +17,6 @@
 import HeaderTextBox from "@/components/Top.vue";
 import Card3 from "@/components/Card3.vue";
 import CardStack from "@/components/CardStack.vue";
-/* import Test from "@/components/Test4.vue"; */
 
 
 export default {
@@ -31,8 +30,8 @@ export default {
 
     activeCard: function(){
 
-      /* return this.$root.$data.cardStack[this.$root.$data.activeCardIndex] */
-      return this.$root.$data.cardStack[this.$root.$data.activeCardIndexCounter + 1]
+      return this.$root.$data.cardStack[this.$root.$data.activeCardIndex]
+      /* return this.$root.$data.cardStack[this.$root.$data.activeCardIndexCounter + 1] */
     }
   }
 };
