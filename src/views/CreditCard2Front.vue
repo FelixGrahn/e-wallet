@@ -1,12 +1,10 @@
 <template>
   <div class="CreditCard2FrontMainDiv">
-    <HeaderTextBox title="ADD A NEW BANK" />
-    <!-- <Card :msg="childData"/> -->
+    <HeaderTextBox title="ADD A NEW BANK CARD" />
+    <p>NEW CARD</p>
     <Card3 v-bind="activeCard"/>
-    <CardStack />
-    <CardForm /> <!-- <CardForm @inputData="updateMessage"/> -->
-    
-    <!-- <UsrMsg @inputData="updateMessage" /> <Results :msg="childData" /> -->
+    <!-- <CardStack /> -->
+    <CardForm />
   </div>
 </template>
 
@@ -16,7 +14,8 @@ import CardForm from "@/components/CredCard2.vue";
 import HeaderTextBox from "@/components/Top.vue";
 
 import Card3 from "@/components/Card3.vue";
-import CardStack from "@/components/CardStack.vue";
+
+/* import CardStack from "@/components/CardStack.vue"; */
 
 
 
@@ -26,14 +25,15 @@ export default {
   components: {
     CardForm,
     HeaderTextBox,
-    CardStack,
+/*     CardStack, */
     Card3
   },
   computed: {
     activeCard: function(){
 
-      return this.$root.$data.cardStack[this.$root.$data.activeCardIndex]
+      /* return this.$root.$data.cardStack[this.$root.$data.activeCardIndex] rätt */
       /* return this.$root.$data.cardStack[this.$root.$data.activeCardIndexCounter] */
+      return this.$root.$data.activeCard;
     }
   }
 };

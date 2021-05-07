@@ -1,29 +1,30 @@
 <template>
   <div class="CardFormMainDiv">
 
-
-<p>Card_Number is: {{ Card_Number }}</p>
-<p>CardHolder_Name is: {{ CardHolder_Name }}</p>
+<!-- <p>Card_Number is: {{ Card_Number }}</p>
+<p>CardHolder_Name is: {{ CardHolder_Name }}</p> -->
 <!-- <p>Valid_thru is: {{ Valid_thru }}</p> -->
-<p>CCV is: {{ CCV }}</p>
+<!-- <p>CCV is: {{ CCV }}</p> -->
 <!-- <p>Vendor is: {{ selected }}</p> -->
     
     
-    
-    
-  <label for="Card_Number">Card_Number:</label>
-  <input type="number" onKeyPress="if(this.value.length==16) return false;"  v-model="Card_Number" />
+    <!-- "'CardBack -' + vendor" -->
 
-    <label for="CardHolder_Name">CardHolder_Name:</label>
-    <input type="text" v-model="CardHolder_Name" />
-    
-    <div class="Valid_thru/CCV">
-    
-    <!-- <input type="number" onKeyPress="if(this.value.length==4) return false;" v-model="Valid_thru" /> -->
-    <p>
-      <label for="Valid_thru">Valid_thru:</label>
-    
-    <select v-model="Valid_thruMonth">
+    <div class="Cardnumber_CardholderFlexContainer">
+    <div class="FormHeaderPlacer">
+  <label for="Card_Number">CARD NUMBER</label>
+  <input type="number" onKeyPress="if(this.value.length==16) return false;"  v-model="Card_Number" v-on:input="updateCardnumber()"/></div>
+
+    <div class="FormHeaderPlacer">
+    <label for="CardHolder_Name" >CARDHOLDER NAME</label>
+    <input type="text" onKeyPress="if(this.value.length==21) return false;" v-model="CardHolder_Name" v-on:input="updateCardholder()"/></div>
+    </div>
+
+    <div class="Cardnumber_CardholderFlexContainer">
+    <div class="FormHeaderPlacer">
+    <label for="Valid_thru">VALID THRU</label>
+    <p class="Valid_thruFlex_Fixer">
+    <select v-model="Valid_thruMonth" v-on:change="updateCardvalidMonth()">
       <option value="01">Januari</option>
       <option value="02">Februari</option>
       <option value="03">Mars</option>
@@ -37,8 +38,8 @@
       <option value="11">November</option>
       <option value="12">December</option>
     </select>
-    <select v-model="Valid_thruDay">
-      <option value="01">01</option>
+    <select v-model="Valid_thruYear" v-on:change="updateCardvalidYear()">
+<!--       <option value="01">01</option>
       <option value="02">02</option>
       <option value="03">03</option>
       <option value="04">04</option>
@@ -57,7 +58,7 @@
       <option value="17">17</option>
       <option value="18">18</option>
       <option value="19">19</option>
-      <option value="20">20</option>
+      <option value="20">20</option> -->
       <option value="21">21</option>
       <option value="22">22</option>
       <option value="23">23</option>
@@ -69,30 +70,31 @@
       <option value="29">29</option>
       <option value="30">30</option>
       <option value="31">31</option>
-
     </select>
-    {{Valid_thruMonth + "/" + Valid_thruDay}}
+    <!-- {{Valid_thruMonth + "/" + Valid_thruYear}} -->
   </p>
+  </div>
 
-    <label for="CCV">CCV:</label>
-    <input type="number" onKeyPress="if(this.value.length==3) return false;" v-model="CCV" />
-    </div>
+<div class="FormHeaderPlacer">
+    <label for="CCV">CCV</label>
+    <input type="number" onKeyPress="if(this.value.length==3) return false;" v-model="CCV" v-on:input="updateCardCCV()"/>
+    </div></div>
 
-    
- <p>
-   <label for="Vendor">Vendor:</label>
-    <select v-model="selected">
+ <div class="VendorFlexPlacer"> 
+ <p class="FormHeaderPlacer">
+   <label for="Vendor">VENDOR</label>
+    <select v-model="selected" v-on:change="updateCardvendor()">
       <option value="Bitcoin">Bitcoin Inc</option>
       <option value="Ninja">Ninja Bank</option>
       <option value="BlockChain">Block Chain Inc</option>
       <option value="EvilCorp">Evil Corp</option>
     </select>
-    {{selected}}
   </p>
+  </div>  
   
 
 
-    <button v-on:click="SubmitYourData()">SubmitYourData</button>
+    <button v-on:click="SubmitYourData()" class="SubmitButton">ADD CARD</button>
     <!-- <button v-on:click="Submit()">Submit</button> -->
 
 
@@ -102,23 +104,13 @@
 <script>
 
 
-/* import ArryayCount from  "@/App.vue"; */
-
 export default {
   data() {
     return {
-      /* CarInfo: {
-        Card_Number: "",
-      CardHolder_Name: "",
-      Valid_thru: "",
-      CCV: "",
-      selected: "",
-      }, */
-      /* tempMessage: "", */
       Card_Number: "",
       CardHolder_Name: "",
       Valid_thruMonth: "",
-      Valid_thruDay: "",
+      Valid_thruYear: "",
       CCV: "",
       selected: "",
     } 
@@ -136,16 +128,78 @@ export default {
         ${this.CCV}
         ${this.selected}
         `), */
-        this.$root.$data.cardStack.push({number: this.Card_Number, vendor: this.selected, holder: this.CardHolder_Name, validMonth: this.Valid_thruMonth, validDay: this.Valid_thruDay, CCV: this.CCV,})
+        this.$root.$data.cardStack.push({number: this.Card_Number, vendor: this.selected, holder: this.CardHolder_Name, validMonth: this.Valid_thruMonth, validYear: this.Valid_thruYear, CCV: this.CCV,})
         this.$root.$data.activeCardIndex= this.$root.$data.activeCardIndex + 1;
-    }/* ,activeCardIndexCounter */
+        this.$router.push('/Test')
+    },
+    updateCardnumber: function() {
+      this.$root.$data.activeCard.push({number: this.Card_Number})
+      console.log("reached updateCardnumber");
+    },
+    updateCardvendor: function() {
+      console.log("reached updateCardvendor " + this.selected);
+      this.$root.$data.activeCard.push({vendor: this.selected})
+    },
+    updateCardholder: function() {
+      console.log("reached updateCardholder");
+      this.$root.$data.activeCard.push({holder: this.CardHolder_Name})
+    },
+    updateCardvalidMonth: function() {
+      console.log("reached updateCardvalidMonth");
+      this.$root.$data.activeCard.push({validMonth: this.Valid_thruMonth})
+    },
+    updateCardvalidYear: function() {
+      console.log("reached updateCardvalidYear");
+      this.$root.$data.activeCard.push({validYear: this.Valid_thruYear,})
+    },
+    updateCardCCV: function() {
+      console.log("reached updateCardCCV");
+      this.$root.$data.activeCard.push({CCV: this.CCV,})
+    }
   },
+  components: {
+    /* Card3 */
+
+  }
 };
 </script>
 
 <style>
 .Header {
-color: brown;
+color: black;
+}
+.SubmitButton {
+    background-color: white;
+    border-radius: 5px;
+    width: 41%;
+    padding: 0.9375em 3.125em;
+}
+input, textarea, select {
+  padding: 14px 10px;
+  border-radius: 10px;
+  border-width: 1px;
+}
+.CardFormMainDiv {
+  border: 2px solid black;
+  width: 95%;
+  padding: 1%;
+}
+.FormHeaderPlacer {
+  display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 2%;
+}
+.Valid_thruFlex_Fixer {
+  display: flex;
+}
+.Cardnumber_CardholderFlexContainer {
+    display: flex;
+    justify-content: space-evenly
+}
+.VendorFlexPlacer {
+  display: flex;
+    justify-content: center;
 }
 
 </style>

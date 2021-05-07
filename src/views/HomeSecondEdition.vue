@@ -1,14 +1,10 @@
 <template>
   <div class="CreditCard2FrontMainDiv">
     <HeaderTextBox title="E-WALLET" />
+      <p>ACTIVE CARD</p>
     <Card3 v-bind="activeCard" />
-    <!-- <Test/> -->
-
-  <p>
-    card stack
-  </p>
-
-<CardStack />
+    <CardStack />
+    <Buttons />
   </div>
 </template>
 
@@ -17,13 +13,14 @@
 import HeaderTextBox from "@/components/Top.vue";
 import Card3 from "@/components/Card3.vue";
 import CardStack from "@/components/CardStack.vue";
-
+import Buttons from "@/components/AddCard.vue";
 
 export default {
   components: {
     HeaderTextBox,
     Card3,
-    CardStack
+    CardStack,
+    Buttons
     /* Test */
   },
   computed: {
@@ -31,7 +28,9 @@ export default {
     activeCard: function(){
 
       /* return this.$root.$data.cardStack[this.$root.$data.activeCardIndex] */
-      return this.$root.$data.cardStack[this.$root.$data.activeCardIndexCounter + 0]
+      /* return this.$root.$data.cardStack[this.$root.$data.activeCardIndexCounter] */
+      return this.$root.$data.activeCard
+      
     }
   }
 };

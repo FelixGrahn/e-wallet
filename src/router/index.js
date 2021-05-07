@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 import Test from "../views/HomeSecondEdition.vue";
 import CredCard2 from "../views/CreditCard2Front.vue";
 
@@ -9,11 +8,11 @@ import CredCard2 from "../views/CreditCard2Front.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  {
+  /* {
     path: "/",
     name: "Home",
     component: Home
-  },
+  }, */
   {
     path: "/Test",
     namn: "Test",
